@@ -100,8 +100,8 @@ async def start_pm(client, message: Message, _):
 async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
-    await message.reply_photo(
-        photo=config.START_IMG_URL,
+    await message.reply_video(
+        video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
     )
@@ -135,8 +135,8 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
-                await message.reply_photo(
-                    photo=config.START_IMG_URL,
+                await message.reply_video(
+                    video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
                     caption=_["start_3"].format(
                         message.from_user.first_name,
                         app.mention,
