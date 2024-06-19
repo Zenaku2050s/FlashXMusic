@@ -18,7 +18,7 @@ def close_markup(_):
         [
             [
                  InlineKeyboardButton(
-                text="🥀 ꜱᴜᴘᴘᴏʀᴛ 🥀", url=f"https://t.me/seriousvs_version10"
+                text=" ꜱᴜᴘᴘᴏʀᴛ ", url=f"https://t.me/seriousvs_version10"
             ),
                 InlineKeyboardButton(
                     text=_["CLOSE_BUTTON"],
