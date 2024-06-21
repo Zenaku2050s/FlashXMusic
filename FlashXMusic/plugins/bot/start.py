@@ -33,7 +33,7 @@ async def start_pm(client, message: Message, _):
         if name[0:4] == "help":
             keyboard = help_pannel(_)
             return await message.reply_video(
-                       video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
+                       video="https://te.legra.ph/file/fc75fef760c29e8ccdf8b.mp4",
                        caption=_["help_1"].format(config.SUPPORT_CHAT), reply_markup=keyboard
             )
         if name[0:3] == "sud":
@@ -84,7 +84,7 @@ async def start_pm(client, message: Message, _):
     else:
         out = private_panel(_)
         await message.reply_video(
-            video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
+            video="https://te.legra.ph/file/fc75fef760c29e8ccdf8b.mp4",
             caption=_["start_2"].format(message.from_user.mention, app.mention),
             reply_markup=InlineKeyboardMarkup(out),
         )
@@ -101,7 +101,7 @@ async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
     await message.reply_video(
-        video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
+        video="https://te.legra.ph/file/fc75fef760c29e8ccdf8b.mp4",
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
     )
@@ -136,7 +136,7 @@ async def welcome(client, message: Message):
 
                 out = start_panel(_)
                 await message.reply_video(
-                    video="https://te.legra.ph/file/2b8291641c7f35a9bee51.mp4",
+                    video="https://te.legra.ph/file/fc75fef760c29e8ccdf8b.mp4",
                     caption=_["start_3"].format(
                         message.from_user.first_name,
                         app.mention,
