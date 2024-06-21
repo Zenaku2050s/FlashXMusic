@@ -14,7 +14,7 @@ from FlashXMusic.utils import get_readable_time
 async def ping_clone(client: Client, message: Message):
     i = await client.get_me()
     hmm = await message.reply_video(
-        video="https://telegra.ph/file/2b8291641c7f35a9bee51.mp4", caption=f"{i.mention} ɪs ᴘɪɴɢɪɴɢ..."
+        video="https://te.legra.ph/file/fc75fef760c29e8ccdf8b.mp4", caption=f"{i.mention} ɪs ᴘɪɴɢɪɴɢ..."
     )
     upt = int(time.time() - StartTime)
     cpu = psutil.cpu_percent(interval=0.5)
