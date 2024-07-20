@@ -31,7 +31,7 @@ class temp:
     U_NAME = None
     B_NAME = None
 
-def circle(pfp, size=(500, 500)):
+def circle(pfp, size=(700, 700)):
     pfp = pfp.resize(size, Image.LANCZOS).convert("RGBA")
     bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
@@ -46,12 +46,14 @@ def welcomepic(pic, user, chatname, id, uname):
     background = Image.open("FlashXMusic/assets/FlashXMusic12.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp)
-    pfp = pfp.resize((825, 824))
+    pfp = pfp.resize((1157, 1158))
     draw = ImageDraw.Draw(background)
     font = ImageFont.truetype('FlashXMusic/assets/font.ttf', size=110)
     welcome_font = ImageFont.truetype('FlashXMusic/assets/font.ttf', size=60)
-    draw.text((2100, 1420), f'ID: {id}', fill=(12000, 12000, 12000), font=font)
-    pfp_position = (1990, 435)
+    draw.text((1800, 700), f'NAME: {user}', fill=(255, 255, 255), font=font)
+    draw.text((1800, 830), f'ID: {id}', fill=(255, 255, 255), font=font)
+    draw.text((1800, 965), f"USERNAME : {uname}", fill=(255, 255, 255), font=font)
+    pfp_position = (391, 336)
     background.paste(pfp, pfp_position, pfp)
     background.save(f"downloads/welcome#{id}.png")
     return f"downloads/welcome#{id}.png"
@@ -72,7 +74,7 @@ async def greet_group(_, member: ChatMemberUpdated):
             user.photo.big_file_id, file_name=f"pp{user.id}.png"
         )
     except AttributeError:
-        pic = "FlashXMusic/assets/FlashXMusic12.png"
+        pic = "FlashXMusic/assets/upic.png"
     if (temp.MELCOW).get(f"welcome-{member.chat.id}") is not None:
         try:
             await temp.MELCOW[f"welcome-{member.chat.id}"].delete()
@@ -87,18 +89,14 @@ async def greet_group(_, member: ChatMemberUpdated):
             photo=welcomeimg,
             caption=f"""
 ❅────✦ ᴡᴇʟᴄᴏᴍᴇ ✦────❅
-
 ▰▰▰▰▰▰▰▰▰▰▰▰▰
-๏ Cԋαƚ Nαɱҽ ➠ {member.chat.title}
-๏ Nαɱҽ ➠ {user.mention}
-๏ Iԃ ➠ {user.id}
-๏ Uʂҽɾɳαɱҽ ➠ @{user.username}
-๏ MαԃҽႦყ ➠ @NhoeKyaiteKaungLayy
+๏ Cԋαƚ Nαɱҽ ✧ {member.chat.title}
+๏ Nαɱҽ ✧ {user.mention}
+๏ Iԃ ✧ {user.id}
+๏ Uʂҽɾɳαɱҽ ✧ @{user.username}
 ▰▰▰▰▰▰▰▰▰▰▰▰▰
-
-❅─────✧❅✦❅✧─────❅
 """,
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f" ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ ", url=f"https://t.me/sasukexmusic_bot?startgroup=true")]])
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f" ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ ", url=f"https://t.me/sasukevipmusicbot?startgroup=true")]])
         )
     except Exception as e:
         LOGGER.error(e)
