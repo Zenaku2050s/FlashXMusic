@@ -67,8 +67,8 @@ def crop_center_circle(img, output_size, border, crop_scale=1.5):
 
 
 async def get_thumb(videoid):
-    if os.path.isfile(f"cache/{videoid}_v4.png"):
-        return f"cache/{videoid}_v4.png"
+    if os.path.isfile(f"cache/{videoid}.png"):
+        return f"cache/{videoid}.png"
 
     url = f"https://www.youtube.com/watch?v={videoid}"
     results = VideosSearch(url, limit=1)
@@ -157,5 +157,5 @@ async def get_thumb(videoid):
         os.remove(f"cache/thumb{videoid}.png")
     except:
         pass
-    background.save(f"cache/{videoid}_v4.png")
-    return f"cache/{videoid}_v4.png"
+    background.save(f"cache/{videoid}.png")
+    return f"cache/{videoid}.png"
