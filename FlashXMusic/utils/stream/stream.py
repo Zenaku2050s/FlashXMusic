@@ -63,8 +63,8 @@ from FlashXMusic.utils.inline import (
 )
 from FlashXMusic.utils.pastebin import HottyBin
 from FlashXMusic.utils.stream.queue import put_queue, put_queue_index
+from FlashXMusic.utils.thumbnails import get_thumb
 from youtubesearchpython.__future__ import VideosSearch
-
 
 async def stream(
     _,
