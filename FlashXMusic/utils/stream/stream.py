@@ -36,7 +36,9 @@ from FlashXMusic.utils.logger import play_logs
 from config import BANNED_USERS, lyrical
 from time import time
 from FlashXMusic.utils.extraction import extract_user
-from FlashXMusic.utils.thumbnails import get_thumb
+from FlashXMusic.utils.thumbnails import get_thumb1
+from youtubesearchpython.__future__ import VideosSearch
+from config import YOUTUBE_IMG_URL
 
 # Define a dictionary to track the last message timestamp for each user
 user_last_message_time = {}
@@ -64,7 +66,7 @@ from FlashXMusic.utils.inline import (
 )
 from FlashXMusic.utils.pastebin import HottyBin
 from FlashXMusic.utils.stream.queue import put_queue, put_queue_index
-from FlashXMusic.utils.thumbnails import get_thumb
+from youtubesearchpython.__future__ import VideosSearch
 
 
 async def stream(
@@ -150,7 +152,7 @@ async def stream(
                     "video" if video else "audio",
                     forceplay=forceplay,
                 )
-                img = await get_thumb(vidid)
+                img = await get_thumb1(vidid)
                 button = stream_markup(_, vidid, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
@@ -209,7 +211,7 @@ async def stream(
                 user_id,
                 "video" if video else "audio",
             )
-            img = await get_thumb(vidid)
+            img = await get_thumb1(vidid)
             position = len(db.get(chat_id)) - 1
             button = aq_markup(_, chat_id)
             await app.send_photo(
@@ -242,7 +244,7 @@ async def stream(
                 "video" if video else "audio",
                 forceplay=forceplay,
             )
-            img = await get_thumb(vidid)
+            img = await get_thumb1(vidid)
             button = stream_markup(_, vidid, chat_id)
             run = await app.send_photo(
                 original_chat_id,
@@ -478,3 +480,27 @@ async def stream(
             db[chat_id][0]["markup"] = "tg"
             await mystic.delete()
 
+
+# Function to get thumbnail by video ID
+async def get_thumb1(videoid):
+    try:
+        # Search for the video using video ID
+        query = f"https://www.youtube.com/watch?v={videoid}"
+        results = VideosSearch(query, limit=1)
+        for result in (await results.next())["result"]:
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        return thumbnail
+    except Exception as e:
+        return config.YOUTUBE_IMG_URL
+
+
+async def get_thumb1(vidid):
+    try:
+        # Search for the video using video ID
+        query = f"https://www.youtube.com/watch?v={vidid}"
+        results = VideosSearch(query, limit=1)
+        for result in (await results.next())["result"]:
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        return thumbnail
+    except Exception as e:
+        return config.YOUTUBE_IMG_URL
