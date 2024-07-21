@@ -68,6 +68,7 @@ from FlashXMusic.utils.pastebin import HottyBin
 from FlashXMusic.utils.stream.queue import put_queue, put_queue_index
 from youtubesearchpython.__future__ import VideosSearch
 from FlashXMusic.utils.thumbnails import get_thumb
+from config import YOUTUBE_IMG_URL
 
 async def stream(
     _,
@@ -491,7 +492,8 @@ async def get_thumb(videoid):
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
         return thumbnail
     except Exception as e:
-        return config.YOUTUBE_IMG_URL
+        print(e)
+        return YOUTUBE_IMG_URL
 
 
 async def get_thumb(vidid):
@@ -503,4 +505,5 @@ async def get_thumb(vidid):
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
         return thumbnail
     except Exception as e:
-        return config.YOUTUBE_IMG_URL
+        print(e)
+        return YOUTUBE_IMG_URL
