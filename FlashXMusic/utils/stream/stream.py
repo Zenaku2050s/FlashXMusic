@@ -11,7 +11,7 @@ from FlashXMusic.misc import db
 from FlashXMusic.utils.database import add_active_video_chat, is_active_chat
 from FlashXMusic.utils.exceptions import AssistantErr
 from FlashXMusic.utils.inline import aq_markup, close_markup, stream_markup
-from FlashXMusic.utils.pastebin import brandedBin
+from FlashXMusic.utils.pastebin import HottyBin
 from FlashXMusic.utils.stream.queue import put_queue, put_queue_index
 from FlashXMusic.utils.thumbnails import get_thumb
 
