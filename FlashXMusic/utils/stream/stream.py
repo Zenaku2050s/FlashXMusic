@@ -1,6 +1,49 @@
 import os
 from random import randint
 from typing import Union
+import random
+import string
+import asyncio
+from pyrogram import client, filters
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
+from pytgcalls.exceptions import NoActiveGroupCall
+from FlashXMusic.utils.database import get_assistant
+import config
+from FlashXMusic import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
+from FlashXMusic.core.call import Hotty
+from FlashXMusic.misc import SUDOERS
+from FlashXMusic.utils import seconds_to_min, time_to_seconds
+from FlashXMusic.utils.channelplay import get_channeplayCB
+from FlashXMusic.utils.decorators.language import languageCB
+from FlashXMusic.utils.decorators.play import PlayWrapper
+from FlashXMusic.utils.formatters import formats
+from FlashXMusic.utils.inline import (
+    botplaylist_markup,
+    livestream_markup,
+    playlist_markup,
+    slider_markup,
+    track_markup,
+)
+from FlashXMusic.utils.database import (
+    add_served_chat,
+    add_served_user,
+    blacklisted_chats,
+    get_lang,
+    is_banned_user,
+    is_on_off,
+)
+from FlashXMusic.utils.logger import play_logs
+from config import BANNED_USERS, lyrical
+from time import time
+from FlashXMusic.utils.extraction import extract_user
+
+# Define a dictionary to track the last message timestamp for each user
+user_last_message_time = {}
+user_command_count = {}
+# Define the threshold for command spamming (e.g., 20 commands within 60 seconds)
+SPAM_THRESHOLD = 2
+SPAM_WINDOW_SECONDS = 5
+
 
 from pyrogram.types import InlineKeyboardMarkup
 
@@ -10,10 +53,16 @@ from FlashXMusic.core.call import Hotty
 from FlashXMusic.misc import db
 from FlashXMusic.utils.database import add_active_video_chat, is_active_chat
 from FlashXMusic.utils.exceptions import AssistantErr
-from FlashXMusic.utils.inline import aq_markup, close_markup, stream_markup
+from FlashXMusic.utils.inline import (
+    aq_markup,
+    queuemarkup,
+    close_markup,
+    stream_markup,
+    panel_markup_4,
+)
 from FlashXMusic.utils.pastebin import HottyBin
 from FlashXMusic.utils.stream.queue import put_queue, put_queue_index
-from FlashXMusic.utils.thumbnails import get_thumb
+from youtubesearchpython.__future__ import VideosSearch
 
 
 async def stream(
@@ -78,7 +127,8 @@ async def stream(
                         vidid, mystic, video=status, videoid=True
                     )
                 except:
-                    raise AssistantErr(_["play_14"])
+
+                    await mystic.edit_text(_["play_3"])
                 await Hotty.join_call(
                     chat_id,
                     original_chat_id,
@@ -99,18 +149,19 @@ async def stream(
                     forceplay=forceplay,
                 )
                 img = await get_thumb(vidid)
-                button = stream_markup(_, chat_id)
+                button = stream_markup(_, vidid, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
                         f"https://t.me/{app.username}?start=info_{vidid}",
-                        title[:23],
+                        title[:18],
                         duration_min,
                         user_name,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
+
                 db[chat_id][0]["mystic"] = run
                 db[chat_id][0]["markup"] = "stream"
         if count == 0:
@@ -142,7 +193,8 @@ async def stream(
                 vidid, mystic, videoid=True, video=status
             )
         except:
-            raise AssistantErr(_["play_14"])
+
+            await mystic.edit_text(_["play_3"])
         if await is_active_chat(chat_id):
             await put_queue(
                 chat_id,
@@ -155,11 +207,15 @@ async def stream(
                 user_id,
                 "video" if video else "audio",
             )
+            img = await get_thumb(vidid)
             position = len(db.get(chat_id)) - 1
             button = aq_markup(_, chat_id)
-            await app.send_message(
+            await app.send_photo(
                 chat_id=original_chat_id,
-                text=_["queue_4"].format(position, title[:27], duration_min, user_name),
+                photo=img,
+                caption=_["queue_4"].format(
+                    position, title[:18], duration_min, user_name
+                ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
         else:
@@ -185,18 +241,19 @@ async def stream(
                 forceplay=forceplay,
             )
             img = await get_thumb(vidid)
-            button = stream_markup(_, chat_id)
+            button = stream_markup(_, vidid, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=img,
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{vidid}",
-                    title[:23],
+                    title[:18],
                     duration_min,
                     user_name,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
+
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "stream"
     elif streamtype == "soundcloud":
@@ -219,7 +276,7 @@ async def stream(
             button = aq_markup(_, chat_id)
             await app.send_message(
                 chat_id=original_chat_id,
-                text=_["queue_4"].format(position, title[:27], duration_min, user_name),
+                text=_["queue_4"].format(position, title[:18], duration_min, user_name),
                 reply_markup=InlineKeyboardMarkup(button),
             )
         else:
@@ -271,7 +328,7 @@ async def stream(
             button = aq_markup(_, chat_id)
             await app.send_message(
                 chat_id=original_chat_id,
-                text=_["queue_4"].format(position, title[:27], duration_min, user_name),
+                text=_["queue_4"].format(position, title[:18], duration_min, user_name),
                 reply_markup=InlineKeyboardMarkup(button),
             )
         else:
@@ -324,7 +381,7 @@ async def stream(
             button = aq_markup(_, chat_id)
             await app.send_message(
                 chat_id=original_chat_id,
-                text=_["queue_4"].format(position, title[:27], duration_min, user_name),
+                text=_["queue_4"].format(position, title[:18], duration_min, user_name),
                 reply_markup=InlineKeyboardMarkup(button),
             )
         else:
@@ -418,3 +475,28 @@ async def stream(
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "tg"
             await mystic.delete()
+
+
+# Function to get thumbnail by video ID
+async def get_thumb(videoid):
+    try:
+        # Search for the video using video ID
+        query = f"https://www.youtube.com/watch?v={videoid}"
+        results = VideosSearch(query, limit=1)
+        for result in (await results.next())["result"]:
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        return thumbnail
+    except Exception as e:
+        return config.YOUTUBE_IMG_URL
+
+
+async def get_thumb(vidid):
+    try:
+        # Search for the video using video ID
+        query = f"https://www.youtube.com/watch?v={vidid}"
+        results = VideosSearch(query, limit=1)
+        for result in (await results.next())["result"]:
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        return thumbnail
+    except Exception as e:
+        return config.YOUTUBE_IMG_URL
