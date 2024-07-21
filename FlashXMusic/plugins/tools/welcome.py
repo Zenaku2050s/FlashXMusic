@@ -88,13 +88,13 @@ async def greet_group(_, member: ChatMemberUpdated):
             member.chat.id,
             photo=welcomeimg,
             caption=f"""
-❅────✦ ᴡᴇʟᴄᴏᴍᴇ ✦────❅
-▰▰▰▰▰▰▰▰▰▰▰▰▰
-๏ Cԋαƚ Nαɱҽ ✧ {member.chat.title}
-๏ Nαɱҽ ✧ {user.mention}
-๏ Iԃ ✧ {user.id}
-๏ Uʂҽɾɳαɱҽ ✧ @{user.username}
-▰▰▰▰▰▰▰▰▰▰▰▰▰
+✧────✦ ᴡᴇʟᴄᴏᴍᴇ ✦────✧
+➖➖➖➖➖➖➖➖➖➖➖
+๏ ᴄʜᴀᴛ ✧ {member.chat.title}
+๏ ɴᴀᴍᴇ ✧ {user.mention}
+๏ ɪᴅ ✧ {user.id}
+๏ ᴜꜱᴇʀɴᴀᴍᴇ ✧ @{user.username}
+➖➖➖➖➖➖➖➖➖➖➖
 """,
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f" ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ ", url=f"https://t.me/sasukevipmusicbot?startgroup=true")]])
         )
