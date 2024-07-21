@@ -7,7 +7,7 @@ from FlashXMusic.core.call import Hotty
 from FlashXMusic.misc import db
 from FlashXMusic.utils.database import get_loop
 from FlashXMusic.utils.decorators import AdminRightsCheck
-from FlashXMusic.utils.inline import close_markup, stream_markup
+from FlashXMusic.utils.inline import close_markup, stream_markup, stream_markup2
 from FlashXMusic.utils.stream.autoclear import auto_clean
 from FlashXMusic.utils.thumbnails import get_thumb
 from config import BANNED_USERS
@@ -114,7 +114,7 @@ async def skip(cli, message: Message, _, chat_id):
             await Hotty.skip_stream(chat_id, link, video=status, image=image)
         except:
             return await message.reply_text(_["call_6"])
-        button = stream_markup(_, chat_id)
+        button = stream_markup2(_, chat_id)
         img = await get_thumb(videoid)
         run = await message.reply_photo(
             photo=img,
@@ -167,7 +167,7 @@ async def skip(cli, message: Message, _, chat_id):
             await Hotty.skip_stream(chat_id, videoid, video=status)
         except:
             return await message.reply_text(_["call_6"])
-        button = stream_markup(_, chat_id)
+        button = stream_markup2(_, chat_id)
         run = await message.reply_photo(
             photo=config.STREAM_IMG_URL,
             caption=_["stream_2"].format(user),
@@ -190,7 +190,7 @@ async def skip(cli, message: Message, _, chat_id):
         except:
             return await message.reply_text(_["call_6"])
         if videoid == "telegram":
-            button = stream_markup(_, chat_id)
+            button = stream_markup2(_, chat_id)
             run = await message.reply_photo(
                 photo=config.TELEGRAM_AUDIO_URL
                 if str(streamtype) == "audio"
