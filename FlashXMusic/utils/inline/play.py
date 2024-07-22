@@ -19,7 +19,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
         ],
         [
             InlineKeyboardButton(
-                text= ["CLOSE_BUTTON"],
+                text=_["CLOSE_BUTTON"],
                 callback_data=f"forceclose {videoid}|{user_id}",
             )
         ],
@@ -70,7 +70,7 @@ def stream_markup_timer(_, vidid, chat_id, played, dur):
                 text="ꜱᴜᴘᴘᴏʀᴛ", url=f"https://t.me/seriousvs_version10"
             ),
         ],
-        [InlineKeyboardButton(text= ["CLOSE_BUTTON"], callback_data="close")],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
@@ -88,7 +88,7 @@ def stream_markup(_, videoid, chat_id):
                 text="ꜱᴜᴘᴘᴏʀᴛ", url=f"https://t.me/seriousvs_version10"
             ),
         ],
-        [InlineKeyboardButton(text= ["CLOSE_BUTTON"], callback_data="close")],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
