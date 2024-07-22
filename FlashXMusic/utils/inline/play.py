@@ -88,7 +88,7 @@ def stream_markup(_, videoid, chat_id):
                 text="ꜱᴜᴘᴘᴏʀᴛ", url=f"https://t.me/seriousvs_version10"
             ),
         ],
-        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
+        [InlineKeyboardButton(text= ["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
