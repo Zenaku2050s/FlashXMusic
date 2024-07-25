@@ -17,11 +17,11 @@ from FlashXMusic.utils.database import get_assistant
 
 
 photo = [
-    "https://te.legra.ph/file/758a5cf4598f061f25963.jpg",
-    "https://te.legra.ph/file/30a1dc870bd1a485e3567.jpg",
-    "https://te.legra.ph/file/d585beb2a6b3f553299d2.jpg",
-    "https://te.legra.ph/file/7df9e128dd261de2afd6b.jpg",
-    "https://te.legra.ph/file/f60ebb75ad6f2786efa4e.jpg",
+    "https://te.legra.ph/file/3f97b2f3407b9a8eefa8d.jpg",
+    "https://te.legra.ph/file/2b81b7b48c1adf5d35e2a.jpg",
+    "https://te.legra.ph/file/17724dedfff3e584b9ede.jpg",
+    "https://te.legra.ph/file/19a08e6bd986035601e3d.jpg",
+    "https://te.legra.ph/file/29beca9e511256320e338.jpg",
 ]
 
 
