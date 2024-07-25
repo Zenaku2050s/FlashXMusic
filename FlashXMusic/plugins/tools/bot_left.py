@@ -15,11 +15,11 @@ from FlashXMusic.utils.database import get_assistant
 from FlashXMusic.utils.database import delete_served_chat
 
 photo = [
-    "https://graph.org/file/872dc8af2a36bed43b9b6.jpg",
-    "https://graph.org/file/f4b34351a59061ba1c61b.jpg",
-    "https://graph.org/file/3fb3f4c8a1250c6a50af1.jpg",
-    "https://graph.org/file/eabab7e8a3e5df87a0b04.jpg",
-    "https://graph.org/file/427f4869a158126957747.jpg",
+    "https://te.legra.ph/file/3f97b2f3407b9a8eefa8d.jpg",
+    "https://te.legra.ph/file/2b81b7b48c1adf5d35e2a.jpg",
+    "https://te.legra.ph/file/17724dedfff3e584b9ede.jpg",
+    "https://te.legra.ph/file/19a08e6bd986035601e3d.jpg",
+    "https://te.legra.ph/file/29beca9e511256320e338.jpg",
 ]
 
 
