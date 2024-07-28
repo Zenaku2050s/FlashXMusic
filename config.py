@@ -19,7 +19,7 @@ MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME")
 
 # Get your mongo url from cloud.mongodb.com
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
-MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME", None)
+
 PRIVATE_BOT_MODE = getenv("PRIVATE_BOT_MODE", None)
 
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 900))
@@ -145,9 +145,3 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
-
-if not MUSIC_BOT_NAME.isascii():
-    print(
-        "[ERROR] - You've defined MUSIC_BOT_NAME wrong. Please don't use any special characters or Special font for this... Keep it simple and small."
-    )
-    sys.exit()
