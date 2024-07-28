@@ -7,11 +7,7 @@ import yaml
 LOGGERS = "Nhoe_Kyaite_Kaung_Layy_Robot"
 
 languages = {}
-commands = {}
 languages_present = {}
-
-def get_command(value: str) -> List:
-    return commands["command"][value]
 
 def get_string(lang: str):
     return languages[lang]
