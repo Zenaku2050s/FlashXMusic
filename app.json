@@ -34,7 +34,7 @@
       },
       "MUSIC_BOT_NAME": {
         "description": "A name for your Music Bot. Please don't use ascii characters",
-        "value": "",
+        "value": "ʟᴏᴠᴇʜᴏᴍᴇᴍᴜꜱɪᴄ",
         "required": true
       },
       "OWNER_ID": {
