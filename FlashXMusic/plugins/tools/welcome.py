@@ -94,6 +94,7 @@ async def greet_group(_, member: ChatMemberUpdated):
 ๏ ɴᴀᴍᴇ ✧ {user.mention}
 ๏ ɪᴅ ✧ {user.id}
 ๏ ᴜꜱᴇʀɴᴀᴍᴇ ✧ @{user.username}
+๏ ᴍᴇᴍʙᴇʀs ᴄᴏᴜɴᴛ ✧ {count}
 ➖➖➖➖➖➖➖➖➖➖➖
 """,
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f" ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ ", url=f"https://t.me/sasukevipmusicbot?startgroup=true")]])
