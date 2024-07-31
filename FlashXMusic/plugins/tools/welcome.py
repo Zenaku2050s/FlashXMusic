@@ -87,10 +87,10 @@ async def greet_group(_, member: ChatMemberUpdated):
         temp.MELCOW[f"welcome-{member.chat.id}"] = await app.send_photo(
             member.chat.id,
             photo=welcomeimg,
-            caption=f"""ʜᴇʏ {user.mention} ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ {member.chat.title} !
-๏ ᴜsᴇʀ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ๏
+            caption=f"""
+ʜᴇʏ {user.mention} ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ 
+๏ {member.chat.title} !๏
 ➖➖➖➖➖➖➖➖➖➖➖
-๏ ᴄʜᴀᴛ ✧ {member.chat.title}
 ๏ ɴᴀᴍᴇ ✧ {user.mention}
 ๏ ɪᴅ ✧ {user.id}
 ๏ ᴜꜱᴇʀɴᴀᴍᴇ ✧ @{user.username}
